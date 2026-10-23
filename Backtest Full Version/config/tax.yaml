@@ -1,0 +1,78 @@
+# Tax Engine Configuration & Legal Reference Database
+# Transparent separation of FACT, ASSUMPTION, and ESTIMATE (Section 31)
+
+country: "Indonesia"
+investor_profile: "Non-US Resident Alien Individual"
+
+# Asset-Level Tax Configurations
+assets:
+  CSPX:
+    name: "iShares Core S&P 500 UCITS ETF (Acc)"
+    ticker: "CSPX.L"
+    domicile: "Ireland"
+    fund_structure: "Accumulating UCITS ETF"
+    assumed_dividend_yield: 0.0150 # 1.50% S&P 500 average dividend yield
+    dividend_withholding_tax_rate: 0.15 # 15% US-Ireland Double Tax Treaty Rate
+    distribution_tax_rate: 0.00 # 0% Irish Withholding Tax on Non-Irish Residents
+    capital_gains_tax_rate: 0.00 # Configurable assumption for foreign capital gains
+    transaction_tax_rate: 0.0005 # 0.05% brokerage stamp/exchange fee
+    us_estate_tax_exposed: false # Ireland domicile protects from US Estate Tax
+    tax_category: "FACT"
+    source: "US-Ireland Double Taxation Treaty (Article 10(2)(b)); Irish Taxes Consolidation Act 1997"
+    verification_status: "VERIFIED"
+
+  VOO_BASELINE:
+    name: "Vanguard S&P 500 ETF (Distributing Baseline)"
+    ticker: "VOO"
+    domicile: "United States"
+    fund_structure: "Distributing US ETF"
+    assumed_dividend_yield: 0.0150 # 1.50% S&P 500 average dividend yield
+    dividend_withholding_tax_rate: 0.30 # 30% US Statutory NRA Withholding Tax
+    distribution_tax_rate: 0.00 # Withheld at source in US
+    capital_gains_tax_rate: 0.00 # Non-resident US capital gains exempt
+    transaction_tax_rate: 0.0005
+    us_estate_tax_exposed: true # US SITUS asset (> $60,000 subject to up to 40% estate tax)
+    tax_category: "FACT"
+    source: "US Internal Revenue Code (IRC) Section 871(a)(1)(A); IRC Section 2101"
+    verification_status: "VERIFIED"
+
+  BTC:
+    name: "Bitcoin Spot"
+    ticker: "BTC-USD"
+    domicile: "Global / Blockchain"
+    fund_structure: "Digital Asset"
+    assumed_dividend_yield: 0.0000
+    dividend_withholding_tax_rate: 0.00
+    dividend_tax_rate: 0.00
+    capital_gains_tax_rate: 0.0010 # 0.10% PPh Final Pasal 22 on transaction
+    transaction_tax_rate: 0.0010 # 0.10% PPh Final + 0.11% PPN on Bappebti exchange
+    tax_category: "FACT"
+    source: "Peraturan Menteri Keuangan RI No. 68/PMK.03/2022"
+    verification_status: "VERIFIED"
+
+  BANK:
+    name: "PT Bank Central Asia Tbk (BBCA)"
+    ticker: "BBCA.JK"
+    domicile: "Indonesia"
+    fund_structure: "Domestic Equity"
+    assumed_dividend_yield: 0.0250 # 2.50% average dividend yield
+    dividend_withholding_tax_rate: 0.10 # 10% PPh Final on Dividend (0% if reinvested min 3 yrs)
+    dividend_tax_rate: 0.10
+    capital_gains_tax_rate: 0.00
+    transaction_tax_rate: 0.0010 # 0.10% PPh Final on gross sales turnover
+    tax_category: "FACT"
+    source: "UU No. 7 Tahun 2021 (UU HPP) & PMK No. 18/PMK.03/2021"
+    verification_status: "VERIFIED"
+
+  GOLD:
+    name: "Gold / Commodity Proxy"
+    ticker: "GLD"
+    domicile: "United States"
+    fund_structure: "Granular Trust ETF"
+    assumed_dividend_yield: 0.0000
+    dividend_withholding_tax_rate: 0.00
+    capital_gains_tax_rate: 0.00
+    transaction_tax_rate: 0.0005
+    tax_category: "ASSUMPTION"
+    source: "General Personal Income Tax Treatment / Self-assessment"
+    verification_status: "ASSUMPTION"
