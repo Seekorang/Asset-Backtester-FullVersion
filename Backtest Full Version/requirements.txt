@@ -1,7 +1,0 @@
-# Core Quantitative Engine Dependencies
-numpy>=1.26.0
-pandas>=2.1.0
-scipy>=1.11.0
-PyYAML>=6.0.1
-yfinance>=0.2.36
-pytest>=7.4.0
