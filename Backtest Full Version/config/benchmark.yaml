@@ -1,0 +1,36 @@
+# Reference Benchmark Portfolio Configuration
+# Classic 60/40 Global Equity / Bond Allocation
+# Used to compute excess return, tracking error, and information ratio
+
+portfolio_name: "60/40 Global Equity-Bond Benchmark"
+base_currency: "USD"
+
+assets:
+  GLOBAL_EQUITY:
+    type: "equity_etf"
+    allocation: 0.60
+    ticker: "VT"
+    description: "Vanguard Total World Stock ETF (FTSE Global All Cap)"
+
+  GLOBAL_BOND:
+    type: "bond"
+    allocation: 0.40
+    ticker: "BND"
+    description: "Vanguard Total Bond Market ETF (US Aggregate Bond Index)"
+
+market_data:
+  default_provider: "yfinance"
+  frequency: "daily"
+  start_date: "2016-01-01"
+  end_date: "2026-10-27"
+  calendar_alignment: "forward_fill"
+  outlier_std_threshold: 4.0
+
+backtest:
+  initial_capital: 10000.0
+  monthly_contribution: 500.0
+  contribution_growth_rate: 0.10
+  rebalance_frequency: "quarterly"
+  rebalance_threshold: 0.05
+  transaction_cost_pct: 0.001
+  annual_inflation_rate: 0.03
